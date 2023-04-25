@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin Dashboard</title>
+	<link rel="stylesheet" type="text/css" href="../static/styles/admin.css">
+    <script>
+		function viewAllAccounts() {
+			// Get the popup element
+			var popup = document.getElementById("view-all-accounts-popup");
+
+			// Show the popup
+			popup.style.display = "block";
+		}
+
+		function createAccounts() {
+			// Get the popup element
+			var popup = document.getElementById("create-accounts-popup");
+
+			// Show the popup
+			popup.style.display = "block";
+		}
+
+		function viewPendingRequests() {
+			// Get the popup element
+			var popup = document.getElementById("view-pending-requests-popup");
+
+			// Show the popup
+			popup.style.display = "block";
+		}
+
+function viewTransactions() {
+			// Get the popup element
+			var popup = document.getElementById("view-transactions-popup");
+
+			// Show the popup
+			popup.style.display = "block";
+		}
+
+function viewInfo() {
+			// Get the popup element
+			var popup = document.getElementById("view-info-popup");
+
+			// Show the popup
+			popup.style.display = "block";
+		}
+
+		function closePopup(popupId) {
+			// Get the popup element
+			var popup = document.getElementById(popupId);
+
+			// Hide the popup
+			popup.style.display = "none";
+		}
+	</script>
+</head>
+<body>
+	<header>
+		<h1>Admin Dashboard</h1>
+	</header>
+
+	<nav>
+		<ul>
+			<li><a href="#" onclick="viewAllAccounts()">View All Accounts</a></li>
+			<li><a href="#" onclick="viewPendingRequests()">View Pending Requests</a></li>
+            <li><a href="#" onclick="viewTransactions()">View Transactions</a></li>
+            <li><a href="/acctransactions">Customer View</a></li>
+
+
+		</ul>
+	</nav>
+
+	<section>
+	</section>
+	<div id="view-all-accounts-popup" class="popup">
+		<div class="popup-content">
+			<h2>View All Accounts</h2>
+<div class="modal-body">
+        <table>
+  <tr>
+    <th>ID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Phone Number</th>
+    <th>Email</th>
+  </tr>
+  {% for account in approved_accounts %}
+      <tr>
+        <td>{{ account.id }}</td>
+          <td>{{ account.first_name }}</td>
+          <td>{{ account.last_name }}</td>
+          <td>{{ account.phone_number }}</td>
+          <td>{{ account.email }}</td>
+
+      </tr>
+  {% endfor %}
+</table>
+      </div>			<button onclick="closePopup('view-all-accounts-popup')">Close</button>
+		</div>
+	</div>
+
+	<div id="create-accounts-popup" class="popup">
+		<div class="popup-content">
+			<h2>Create Accounts</h2>
+			<form method="post" action="/add_account">
+				<label for="first-name">First Name:</label>
+				<input type="text" id="first-name" name="first_name"><br><br>
+
+				<label for="last-name">Last Name:</label>
+				<input type="text" id="last-name" name="last_name"><br><br>
+
+				<label for="ssn">SSN:</label>
+				<input type="text" id="ssn" name="ssn"><br><br>
+
+				<label for="phone-number">Phone Number:</label>
+				<input type="text" id="phone-number" name="phone_number"><br><br>
+
+				<label for="email">Email:</label>
+				<input type="email" id="email" name="email"><br><br>
+
+                <label for="last-name">Address:</label>
+				<input type="text" id="address" name="address"><br><br>
+
+				<label for="password">Password:</label>
+				<input type="password" id="password" name="password"><br><br>
+
+				<input type="hidden" id="type" name="type" value="customer">
+
+				<button type="submit">Create</button>
+				<button onclick="closePopup('create-accounts-popup')">Cancel</button>
+			</form>
+		</div>
+	</div>
+
+	<div id="view-pending-requests-popup" class="popup">
+		<div class="popup-content">
+			<h2>View Pending Requests</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Request Type</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for account in pending_accounts %}
+      <tr>
+        <td>Account</td>
+        <td>{{ account.first_name }}</td>
+          <td>{{ account.last_name }}</td>
+        <td>{{ account.email }}</td>
+        <td>
+          <form method="post" action="{{ url_for('approve_account', id=account.id) }}">
+            <button type="submit" name="action" value="approve">Approve</button>
+            <button type="submit" name="action" value="deny">Deny</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>			<button onclick="closePopup('view-pending-requests-popup')">Close</button>
+		</div>
+	</div>
+<div id="view-transactions-popup" class="popup">
+    <div class="popup-content">
+        <h2>View Transactions</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Balance Before</th>
+                    <th> Transaction Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in approved_transactions %}
+                <tr>
+                    <td>{{ transaction.id }}</td>
+                    <td>{{ transaction.balance }}</td>
+                    <td>{{ transaction.amount }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button onclick="closePopup('view-transactions-popup')">Close</button>
+    </div>
+</div>
+
+
+	<footer>
+		<p>&copy; 2023 Admin Dashboard. All rights reserved.</p>
+	</footer>
+</body>
+</html>

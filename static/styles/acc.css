@@ -1,0 +1,61 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Set body background and font color */
+body {
+  background-color: #121212;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+/* Set header background, font size, and margin */
+h1 {
+  background-color: #00b894;
+  font-size: 36px;
+  margin: 20px 0;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Set list styles */
+ul {
+  list-style: none;
+  margin: 20px 0;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+/* Set button styles */
+button {
+  background-color: #00b894;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+  padding: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #0984e3;
+}
+
+/* Set popup message styles */
+.alert {
+  background-color: #0984e3;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  margin-top: 20px;
+  padding: 10px;
+  text-align: center;
+}

@@ -1,0 +1,27 @@
+{% block body%}
+<link rel="stylesheet" href="../static/styles/index.css">
+<body>
+    <header>
+        <h1>Portal Login</h1>
+    </header>
+    <main>
+        <form id="login_form" class="form_class" action="/login" method="post">
+            <div class="form_div">
+                <label>Email:</label>
+                <input class="field_class" id="email" type="email" name="email" type="text" placeholder="Email" autofocus>
+                <label>Password:</label>
+                <input id="pass" class="field_class" name="password" type="password" placeholder="Password">
+                <button class="submit_class" type="submit" form="login_form" >Login</button>
+            </div>
+            <div class="info_div">
+                <form>
+                <p>A new user? <a href="/register">Sign Up Today!</a></p>
+                </form>
+            </div>
+        </form>
+    </main>
+    <footer>
+        <p>Official Riley Is Great Banking Network<a href="#"><3</a></p>
+    </footer>
+</body>
+{% endblock %}

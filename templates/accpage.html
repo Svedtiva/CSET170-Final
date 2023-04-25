@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin Dashboard</title>
+	<link rel="stylesheet" type="text/css" href="../static/styles/admin.css">
+    <script>
+		function viewBalance() {
+			// Get the popup element
+			var popup = document.getElementById("view-balance-popup");
+
+			// Show the popup
+			popup.style.display = "block";
+		}
+
+		function makePayment() {
+			// Get the popup element
+			var popup = document.getElementById("make-payment-popup");
+
+			// Show the popup
+			popup.style.display = "block";
+		}
+
+		function addMoney() {
+			// Get the popup element
+			var popup = document.getElementById("add-money-popup");
+
+			// Show the popup
+			popup.style.display = "block";
+		}
+
+function viewTransactions() {
+			// Get the popup element
+			var popup = document.getElementById("view-transactions-popup");
+
+			// Show the popup
+			popup.style.display = "block";
+		}
+
+function viewInfo() {
+			// Get the popup element
+			var popup = document.getElementById("view-info-popup");
+
+			// Show the popup
+			popup.style.display = "block";
+		}
+
+		function closePopup(popupId) {
+			// Get the popup element
+			var popup = document.getElementById(popupId);
+
+			// Hide the popup
+			popup.style.display = "none";
+		}
+	</script>
+</head>
+<body>
+	<header>
+		<h1>Welcome, {{session.first_name}}</h1>
+	</header>
+
+	<nav>
+		<ul>
+			<li><a href="#" onclick="viewBalance()">View Balance</a></li>
+			<li><a href="#" onclick="viewTransactions()">View Transactions</a></li>
+			<li><a href="#" onclick="makePayment()">Make Payment</a></li>
+            <li><a href="#" onclick="addMoney()">Add Money</a></li>
+            <li><a href="#" onclick="viewInfo()">View Info</a></li>
+
+
+		</ul>
+	</nav>
+
+	<section>
+	</section>
+	<div id="view-balance-popup" class="popup">
+		<div class="popup-content">
+            <H2>{{session.first_name}}'s Balance</H2>
+            <h1>{{session.balance}}</h1>
+						<button onclick="closePopup('view-balance-popup')">Close</button>
+		</div>
+	</div>
+
+	<div id="make-payment-popup" class="popup">
+    <H2>Make Payment</H2>
+        <form action="/add_transaction" method="POST">
+        <label for="card-number">Account Number:</label>
+      <input type="text" id="acc-number" name="acc-number"><br><br>
+
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" name="amount"><br><br>
+            <input type="submit">
+        </form>
+
+            			<button onclick="closePopup('make-payment-popup')">Close</button>
+
+	</div>
+
+	<div id="add-money-popup" class="popup">
+		<div class="popup-content">
+			<h2>Add Money</h2>
+			<form action="/deposit" method="POST">
+      <label for="card-number">Card Number:</label>
+      <input type="text" id="card-number" name="card-number" required><br><br>
+
+      <label for="exp-date">Expiration Date:</label>
+      <input type="text" id="exp-date" name="exp-date" required><br><br>
+
+      <label for="cvv">CVV:</label>
+      <input type="text" id="cvv" name="cvv" required><br><br>
+
+                <label for="amount">Amount:</label>
+      <input type="text" id="" name="amount" required><br><br>
+      <input type="submit" value="Add Money">
+    </form>
+			<button onclick="closePopup('add-money-popup')">Close</button>
+		</div>
+	</div>
+<div id="view-transactions-popup" class="popup">
+    <div class="popup-content">
+        <h2>View Transactions</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Balance</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in acctransactions %}
+                <tr>
+                    <td>{{ transaction.id }}</td>
+                    <td>{{ transaction.balance }}</td>
+                    <td>{{ transaction.amount }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button onclick="closePopup('view-transactions-popup')">Close</button>
+    </div>
+</div>
+
+    <div id="view-info-popup" class="popup">
+		<div class="popup-content">
+             <tr>
+                    <th>ID</th>
+                    <th>first name</th>
+                    <th>last name</th>
+                 <th>phone num</th>
+                 <th>email</th>
+                 <th>address</th>
+                 <th>ssn</th>
+                </tr><br><br>
+    <tr>
+        <td>{{ session.id }}</td>
+          <td>{{ session.first_name }}</td>
+          <td>{{ session.last_name }}</td>
+          <td>{{ session.phone_number }}</td>
+          <td>{{ session.email }}</td>
+          <td>{{ session.Address }}</td>
+        <td>{{ session.ssn }}</td>
+      </tr><br><br>
+                    <button onclick="closePopup('view-info-popup')">Close</button>
+
+        </div>
+    </div>
+	<footer>
+		<p>&copy; 2023 Customer Dashboard. All rights reserved.</p>
+	</footer>
+</body>
+</html>
